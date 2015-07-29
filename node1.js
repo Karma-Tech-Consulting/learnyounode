@@ -1,8 +1,5 @@
-var total = 0;
-for(var i = 0, len = process.argv.length; i < len; i++){
-    if(i >= 2){
-        total += Number(process.argv[i]);
-    }
-}
-
-console.log(total);
+var fs = require('fs');
+var buf = fs.readFileSync(process.argv[2]); // test file passed in as arg.
+var str = buf.toString();
+var lines = str.split('\n');
+console.log( lines.length - 1 );
