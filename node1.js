@@ -1,5 +1,15 @@
 var fs = require('fs');
-var str = fs.readFile(process.argv[2], 'utf-8', function(err, data){
-    var lines = data.split('\n');
-    console.log( lines.length - 1 );
+
+var file =  process.argv[2];
+var extension = process.argv[3];
+var lenExtension = extension.length * -1;
+dotIndex = lenExtension - 1;
+
+var str = fs.readdir(file, function(err,
+ list){
+    for(item in list){
+        if(list[item].substr(dotIndex, 1) == "." && list[item].substr(lenExtension) == extension)
+        console.log(list[item]);
+    }
+    
 }); // test file passed in as arg.
