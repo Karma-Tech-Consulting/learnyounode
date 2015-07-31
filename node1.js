@@ -1,19 +1,9 @@
-var net = require('net')
-var twoDigit = function(input){
-    return (input < 10 ? '0' : '') + input;
-};
+var http = require('http');
+var fs = require('fs');
 
-var date = new Date();
-var year = date.getFullYear();
-var month = date.getMonth() + 1;
-var day = date.getDate();
-var hour = date.getHours();
-var minutes = date.getMinutes();
-
-var data = [year, twoDigit(month), twoDigit(day)].join('-') + " " + [twoDigit(hour), twoDigit(minutes)].join(":");
-
-var server = net.createServer(function(socket){
+var server = http.createServer(function(req, res){
     //socket logic
-    socket.end(data.toString());
+    var src = fs.createReadStream(process.argv[3]);
+    src.pipe(res);
 });
 server.listen(Number(process.argv[2]));
